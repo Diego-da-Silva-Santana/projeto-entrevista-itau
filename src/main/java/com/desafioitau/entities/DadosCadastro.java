@@ -1,5 +1,6 @@
 package com.desafioitau.entities;
 
+import com.desafioitau.dto.response.DadosCadastroResponseDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -31,6 +32,10 @@ public class DadosCadastro {
         this.cpf = cpf;
         this.idade = idade;
         this.pais = pais;
+    }
+
+    public DadosCadastroResponseDTO toDadosCadastroResponseDTO(){
+        return new DadosCadastroResponseDTO(id, nome, cpf, idade, pais);
     }
 
     public Long getId() {
