@@ -7,14 +7,13 @@ import java.util.List;
 
 public interface DadosCadastroService {
 
-   DadosCadastroResponseDTO findById(Long id);
+    DadosCadastroResponseDTO findById(Long id);
 
-   List<DadosCadastroResponseDTO> findAll();
+    List<DadosCadastroResponseDTO> findAll();
 
-   DadosCadastroResponseDTO cadastrar(DadosCadastroRequestDTO dadosCadastroDTO);
+    DadosCadastroResponseDTO cadastrar(DadosCadastroRequestDTO dadosCadastroDTO);
 
-   DadosCadastroResponseDTO update(DadosCadastroRequestDTO dadosCadastroDTO, Long id);
+    DadosCadastroResponseDTO update(DadosCadastroRequestDTO dadosCadastroDTO, Long id);
 
-   String delete(Long id);
-
+    String delete(Long id);
 }

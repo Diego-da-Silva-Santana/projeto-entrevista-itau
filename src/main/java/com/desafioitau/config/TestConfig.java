@@ -23,7 +23,6 @@ public class TestConfig implements CommandLineRunner {
         DadosCadastro c2 = new DadosCadastro("Pedro da Silva Santana", "208.941.580-07", 33, "Argentina");
         DadosCadastro c3 = new DadosCadastro("Joao da Silva Santana", "556.448.560-20", 39, "Chile");
 
-
         cadastroRepository.saveAll(Arrays.asList(c1, c2, c3));
     }
 }

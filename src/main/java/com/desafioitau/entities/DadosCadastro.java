@@ -17,8 +17,7 @@ public class DadosCadastro {
 
     @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
-
-    @Column(name = "idade", nullable = false, unique = true)
+    @Column(name = "idade", nullable = false)
     private Integer idade;
 
     @Column(name = "pais", nullable = false)
@@ -34,7 +33,7 @@ public class DadosCadastro {
         this.pais = pais;
     }
 
-    public DadosCadastroResponseDTO toDadosCadastroResponseDTO(){
+    public DadosCadastroResponseDTO toDadosCadastroResponseDTO() {
         return new DadosCadastroResponseDTO(id, nome, cpf, idade, pais);
     }
 

@@ -1,5 +1,7 @@
 package com.desafioitau.dto.request;
 
+import com.desafioitau.entities.DadosCadastro;
+
 public class DadosCadastroRequestDTO {
 
     private String nome;
@@ -15,6 +17,10 @@ public class DadosCadastroRequestDTO {
         this.cpf = cpf;
         this.idade = idade;
         this.pais = pais;
+    }
+
+    public DadosCadastro ToDadosCadastro() {
+        return new DadosCadastro(nome, cpf, idade, pais);
     }
 
     public String getNome() {

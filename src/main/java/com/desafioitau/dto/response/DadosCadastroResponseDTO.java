@@ -1,5 +1,7 @@
 package com.desafioitau.dto.response;
 
+import com.desafioitau.entities.DadosCadastro;
+
 public class DadosCadastroResponseDTO {
 
     private Long id;
@@ -19,8 +21,15 @@ public class DadosCadastroResponseDTO {
         this.pais = pais;
     }
 
-    public Long getId() {
+    public DadosCadastroResponseDTO(DadosCadastro dadosCadastro) {
+        this.id = dadosCadastro.getId();
+        this.nome = dadosCadastro.getNome();
+        this.cpf = dadosCadastro.getCpf();
+        this.idade = dadosCadastro.getIdade();
+        this.pais = dadosCadastro.getPais();
+    }
 
+    public Long getId() {
         return id;
     }
 

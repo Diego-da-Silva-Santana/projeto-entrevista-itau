@@ -1,14 +1,15 @@
 package com.desafioitau.controller;
 
+import com.desafioitau.dto.request.DadosCadastroRequestDTO;
 import com.desafioitau.dto.response.DadosCadastroResponseDTO;
-import com.desafioitau.service.DadosCadastroServiceImpl;
+import com.desafioitau.service.DadosCadastroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,7 @@ import java.util.List;
 public class DadosCadastroController {
 
     @Autowired
-    private DadosCadastroServiceImpl cadastroService;
+    private DadosCadastroService cadastroService;
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<DadosCadastroResponseDTO> findById(@PathVariable Long id) {
@@ -28,6 +29,13 @@ public class DadosCadastroController {
     public ResponseEntity<List<DadosCadastroResponseDTO>> findAll() {
         List<DadosCadastroResponseDTO> list = cadastroService.findAll();
         return ResponseEntity.ok().body(list);
+    }
+
+    @PostMapping
+    public ResponseEntity<DadosCadastroResponseDTO> cadastrar(@Valid @RequestBody DadosCadastroRequestDTO cadastroRequestDTO) {
+        DadosCadastroResponseDTO cadastroResponseDTO = cadastroService.cadastrar(cadastroRequestDTO);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cadastroResponseDTO.getId()).toUri();
+        return ResponseEntity.created(uri).body(cadastroResponseDTO);
     }
 
 }

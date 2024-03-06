@@ -4,6 +4,7 @@ import com.desafioitau.dto.request.DadosCadastroRequestDTO;
 import com.desafioitau.dto.response.DadosCadastroResponseDTO;
 import com.desafioitau.entities.DadosCadastro;
 import com.desafioitau.exceptions.ResourceNotFoundException;
+import com.desafioitau.exceptions.ResourceNotValidException;
 import com.desafioitau.repositories.DadosCadastroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,13 @@ public class DadosCadastroServiceImpl implements DadosCadastroService {
     }
 
     @Override
-    public DadosCadastroResponseDTO cadastrar(DadosCadastroRequestDTO dadosCadastroDTO) {
-        return null;
+    public DadosCadastroResponseDTO cadastrar(DadosCadastroRequestDTO dadosCadastroRequestDTODTO) {
+        if (repository.existsBycpf(dadosCadastroRequestDTODTO.getCpf())) {
+            throw new ResourceNotValidException("O CPF: " + dadosCadastroRequestDTODTO.getCpf() + " já está cadastrado na base de dados");
+        }
+        DadosCadastro cadastroRetornado = repository.save(dadosCadastroRequestDTODTO.ToDadosCadastro());
+        DadosCadastroResponseDTO dadosCadastroResponseDTO = new DadosCadastroResponseDTO(cadastroRetornado);
+        return dadosCadastroResponseDTO;
     }
 
     @Override

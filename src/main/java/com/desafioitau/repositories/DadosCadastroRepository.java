@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DadosCadastroRepository extends JpaRepository<DadosCadastro, Long> {
+
+    boolean existsBycpf(String cpf);
+
 }
