@@ -20,14 +20,14 @@ public class DadosCadastroController {
     private DadosCadastroService cadastroService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<DadosCadastroResponseDTO> findById(@PathVariable Long id) {
-        DadosCadastroResponseDTO cadastroResponseDTO = cadastroService.findById(id);
+    public ResponseEntity<DadosCadastroResponseDTO> detalharCadastro(@PathVariable Long id) {
+        DadosCadastroResponseDTO cadastroResponseDTO = cadastroService.detalharCadastro(id);
         return ResponseEntity.ok().body(cadastroResponseDTO);
     }
 
     @GetMapping
-    public ResponseEntity<List<DadosCadastroResponseDTO>> findAll() {
-        List<DadosCadastroResponseDTO> list = cadastroService.findAll();
+    public ResponseEntity<List<DadosCadastroResponseDTO>> listarCadastros() {
+        List<DadosCadastroResponseDTO> list = cadastroService.listarCadastros();
         return ResponseEntity.ok().body(list);
     }
 

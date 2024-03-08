@@ -19,14 +19,14 @@ public class DadosCadastroServiceImpl implements DadosCadastroService {
     private DadosCadastroRepository repository;
 
     @Override
-    public DadosCadastroResponseDTO findById(Long id) {
+    public DadosCadastroResponseDTO detalharCadastro(Long id) {
         Optional<DadosCadastro> optionalDadosCadastro = repository.findById(id);
 
         return optionalDadosCadastro.orElseThrow(() -> new ResourceNotFoundException("O cadastro com ID: " + id + " não foi encontrado na base de dados.")).toDadosCadastroResponseDTO();
     }
 
     @Override
-    public List<DadosCadastroResponseDTO> findAll() {
+    public List<DadosCadastroResponseDTO> listarCadastros() {
         List<DadosCadastro> dadosCadastros = repository.findAll();
 
         return dadosCadastros.stream().map(DadosCadastro::toDadosCadastroResponseDTO).collect(Collectors.toList());

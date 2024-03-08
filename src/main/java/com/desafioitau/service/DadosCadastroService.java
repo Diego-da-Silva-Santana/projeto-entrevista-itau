@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface DadosCadastroService {
 
-    DadosCadastroResponseDTO findById(Long id);
+    DadosCadastroResponseDTO detalharCadastro(Long id);
 
-    List<DadosCadastroResponseDTO> findAll();
+    List<DadosCadastroResponseDTO> listarCadastros();
 
     DadosCadastroResponseDTO cadastrar(DadosCadastroRequestDTO dadosCadastroDTO);
 
