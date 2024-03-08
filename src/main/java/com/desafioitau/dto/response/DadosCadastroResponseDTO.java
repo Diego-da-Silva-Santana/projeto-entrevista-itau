@@ -1,7 +1,9 @@
 package com.desafioitau.dto.response;
 
 import com.desafioitau.entities.DadosCadastro;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_NULL)
 public class DadosCadastroResponseDTO {
 
     private Long id;

@@ -38,4 +38,15 @@ public class DadosCadastroController {
         return ResponseEntity.created(uri).body(cadastroResponseDTO);
     }
 
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<DadosCadastroResponseDTO> atualizarDados(@Valid @RequestBody DadosCadastroRequestDTO cadastroRequestDTO, @PathVariable("id") Long id) {
+        DadosCadastroResponseDTO dadosCadastro = cadastroService.atualizarDados(id, cadastroRequestDTO);
+        return ResponseEntity.ok().body(dadosCadastro);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletarCadastro(@PathVariable Long id){
+        cadastroService.deletarCadastro(id);
+        return ResponseEntity.noContent().build();
+    }
 }

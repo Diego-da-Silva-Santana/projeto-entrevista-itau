@@ -13,7 +13,7 @@ public interface DadosCadastroService {
 
     DadosCadastroResponseDTO cadastrar(DadosCadastroRequestDTO dadosCadastroDTO);
 
-    DadosCadastroResponseDTO update(DadosCadastroRequestDTO dadosCadastroDTO, Long id);
+    DadosCadastroResponseDTO atualizarDados(Long id, DadosCadastroRequestDTO dadosCadastroDTO );
 
-    String delete(Long id);
+    void deletarCadastro(Long id);
 }

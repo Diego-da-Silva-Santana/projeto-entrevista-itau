@@ -1,7 +1,9 @@
 package com.desafioitau.entities;
 
+import com.desafioitau.dto.request.DadosCadastroRequestDTO;
 import com.desafioitau.dto.response.DadosCadastroResponseDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_cadastro")
@@ -15,7 +17,8 @@ public class DadosCadastro {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "cpf", nullable = false, unique = true)
+    @Column(name = "cpf", unique = true)
+    @Size(min = 14, max = 14)
     private String cpf;
     @Column(name = "idade", nullable = false)
     private Integer idade;
@@ -36,6 +39,17 @@ public class DadosCadastro {
     public DadosCadastroResponseDTO toDadosCadastroResponseDTO() {
         return new DadosCadastroResponseDTO(id, nome, cpf, idade, pais);
     }
+
+    public void atualizacaoDadosCadastro(DadosCadastroRequestDTO dadosDTO) {
+
+        if (dadosDTO.getIdade() != null) {
+            this.idade = dadosDTO.getIdade();
+        }
+        if (dadosDTO.getPais() != null) {
+            this.pais = dadosDTO.getPais();
+        }
+    }
+
 
     public Long getId() {
         return id;

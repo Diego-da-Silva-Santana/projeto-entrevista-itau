@@ -21,12 +21,14 @@ public class DadosCadastroServiceImpl implements DadosCadastroService {
     @Override
     public DadosCadastroResponseDTO findById(Long id) {
         Optional<DadosCadastro> optionalDadosCadastro = repository.findById(id);
+
         return optionalDadosCadastro.orElseThrow(() -> new ResourceNotFoundException("O cadastro com ID: " + id + " não foi encontrado na base de dados.")).toDadosCadastroResponseDTO();
     }
 
     @Override
     public List<DadosCadastroResponseDTO> findAll() {
         List<DadosCadastro> dadosCadastros = repository.findAll();
+
         return dadosCadastros.stream().map(DadosCadastro::toDadosCadastroResponseDTO).collect(Collectors.toList());
     }
 
@@ -37,16 +39,29 @@ public class DadosCadastroServiceImpl implements DadosCadastroService {
         }
         DadosCadastro cadastroRetornado = repository.save(dadosCadastroRequestDTODTO.ToDadosCadastro());
         DadosCadastroResponseDTO dadosCadastroResponseDTO = new DadosCadastroResponseDTO(cadastroRetornado);
+
         return dadosCadastroResponseDTO;
     }
 
     @Override
-    public DadosCadastroResponseDTO update(DadosCadastroRequestDTO dadosCadastroDTO, Long id) {
-        return null;
+    public DadosCadastroResponseDTO atualizarDados(Long id, DadosCadastroRequestDTO dadosCadastroDTO) {
+
+        Optional<DadosCadastro> possivelDadosCadastroEntity = this.repository.findById(id);
+        if (possivelDadosCadastroEntity.isEmpty()) {
+            throw new ResourceNotFoundException("Dados do cadastro não foi encontrado na base de dados.");
+        }
+        DadosCadastro dadosCadastro = possivelDadosCadastroEntity.get();
+        dadosCadastro.atualizacaoDadosCadastro(dadosCadastroDTO);
+        repository.save(dadosCadastro);
+
+        return dadosCadastro.toDadosCadastroResponseDTO();
     }
 
     @Override
-    public String delete(Long id) {
-        return null;
+    public void deletarCadastro(Long id) {
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("O ID " + id + " não foi encontrado na base de dados.");
+        }
+        repository.deleteById(id);
     }
 }
