@@ -124,7 +124,7 @@ Status: 200 OK
 		"pais": "Brasil"
 	}
 ]
-}
+
 ```
 
 [GET]
